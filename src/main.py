@@ -310,8 +310,13 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
                 if file and os.path.exists(file):
                     os.remove(file)
 
-        return ai_cover_path
+        # Returning the stems: original vocal, original instrumental, AI generated vocal, and AI cover
+        print(f"Vocals path:{vocals_path}")
+        print(f"Instrumental path:{instrumentals_path}")
+        print(f"AI Vocals path: {ai_vocals_path}")
 
+        return ai_cover_path, vocals_path, instrumentals_path, ai_vocals_path
+        
     except Exception as e:
         raise_exception(str(e), is_webui)
 
@@ -353,3 +358,5 @@ if __name__ == '__main__':
                                      reverb_dry=args.reverb_dryness, reverb_damping=args.reverb_damping,
                                      output_format=args.output_format)
     print(f'[+] Cover generated at {cover_path}')
+
+
