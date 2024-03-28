@@ -313,8 +313,7 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
 
             # Returning the stems: AI cover, original vocal, original instrumental, AI generated vocal
 
-            #path = "AAAAAAAAAAAAAAAAAAAAAAA"
-            return ai_cover_path#, vocals_path, instrumentals_path, ai_vocals_path
+            return ai_cover_path, vocals_path, instrumentals_path, ai_vocals_path
                 
         except Exception as e:
             raise_exception(str(e), is_webui)
@@ -347,8 +346,8 @@ if __name__ == '__main__':
     if not os.path.exists(os.path.join(rvc_models_dir, rvc_dirname)):
         raise Exception(f'The folder {os.path.join(rvc_models_dir, rvc_dirname)} does not exist.')
 
-    #cover_path, original_vocals, original_instrumentals, ai_vocals= song_cover_pipeline(args.song_input, rvc_dirname, args.pitch_change, args.keep_files,
-    cover_path = song_cover_pipeline(args.song_input, rvc_dirname, args.pitch_change, args.keep_files,
+    cover_path, original_vocals, original_instrumentals, ai_vocals= song_cover_pipeline(args.song_input, rvc_dirname, args.pitch_change, args.keep_files,
+    #cover_path, original_vocals = song_cover_pipeline(args.song_input, rvc_dirname, args.pitch_change, args.keep_files,
                                      main_gain=args.main_vol, backup_gain=args.backup_vol, inst_gain=args.inst_vol,
                                      index_rate=args.index_rate, filter_radius=args.filter_radius,
                                      rms_mix_rate=args.rms_mix_rate, f0_method=args.pitch_detection_algo,
@@ -359,8 +358,8 @@ if __name__ == '__main__':
                                      output_format=args.output_format)
     
     print(f'[+] Cover generated at {cover_path}')
-    #print(f'[+] Original vocals at {original_vocals}')
-    #print(f'[+] Original instrumentals at {original_instrumentals}')
-    #print(f'[+] AI vocals at {ai_vocals}')
+    print(f'[+] Original vocals at {original_vocals}')
+    print(f'[+] Original instrumentals at {original_instrumentals}')
+    print(f'[+] AI vocals at {ai_vocals}')
 
 
